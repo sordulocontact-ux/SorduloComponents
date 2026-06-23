@@ -49,6 +49,16 @@ export type GlassParams = {
   borderWidth: number;
   /** Couleur du contour. */
   borderColor: string;
+  /** Drop shadow — décalage horizontal (px). */
+  shadowX: number;
+  /** Drop shadow — décalage vertical (px). */
+  shadowY: number;
+  /** Drop shadow — flou (px). */
+  shadowBlur: number;
+  /** Drop shadow — opacité (0 = aucune ombre). */
+  shadowOpacity: number;
+  /** Drop shadow — couleur. */
+  shadowColor: string;
   /** Couleur du bouton de sélection intérieur (hex). */
   indicatorColor: string;
   /** Opacité du bouton de sélection. */
@@ -67,6 +77,11 @@ export const DEFAULT_GLASS: GlassParams = {
   trackOpacity: 0.12,
   borderWidth: 0,
   borderColor: '#ffffff',
+  shadowX: 0,
+  shadowY: 6,
+  shadowBlur: 18,
+  shadowOpacity: 0.18,
+  shadowColor: '#000000',
   indicatorColor: '#000000',
   indicatorOpacity: 0.32,
 };
@@ -227,6 +242,10 @@ export default function MemoryViewModePicker({
             width: 232,
             background: hexToRgba(p.trackColor, p.trackOpacity),
             border: p.borderWidth > 0 ? `${p.borderWidth}px solid ${hexToRgba(p.borderColor, 1)}` : undefined,
+            boxShadow:
+              p.shadowOpacity > 0
+                ? `${p.shadowX}px ${p.shadowY}px ${p.shadowBlur}px ${hexToRgba(p.shadowColor, p.shadowOpacity)}`
+                : 'none',
           }}
           role="tablist"
           aria-label="Mode de visualisation"
@@ -301,7 +320,6 @@ const styles = `
   justify-content: center;
   padding: 32px;
   border-radius: 20px;
-  overflow: hidden;
   background-color: #6d5bd0;
   background-image:
     linear-gradient(135deg, rgba(109, 91, 208, 0.35), rgba(34, 197, 194, 0.35)),
@@ -315,23 +333,19 @@ const styles = `
   background: none;
 }
 
-/* Fond et contour du track sont pilotés en inline (paramètres trackColor/Opacity,
-   borderWidth/Color). Ici : forme, ombre douce et comportement. */
+/* Fond, contour et ombre du track sont pilotés en inline (paramètres trackColor/Opacity,
+   borderWidth/Color, shadow*). Ici : forme et comportement. */
 .mvmp-track {
   position: relative;
   display: flex;
   padding: 4px;
   border-radius: 9999px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
   touch-action: none;
   user-select: none;
   -webkit-user-select: none;
 }
 
 /* Glassmorphism désactivé : texte foncé non sélectionné / blanc sur la sélection. */
-.mvmp-track[data-glass='false'] {
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-}
 .mvmp-track[data-glass='false'] .mvmp-tab {
   color: rgba(0, 8, 46, 0.55);
   text-shadow: none;

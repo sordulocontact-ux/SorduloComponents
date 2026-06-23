@@ -15,9 +15,9 @@ export default function Header() {
     if (!el) return;
     const inst = createLiquidGlass(el, {
       borderRadius: 0,
-      scale: -80, // réfraction (effet concentré sur les bords)
-      cssBlur: 2, // flou global léger seulement
-      saturation: 1.15,
+      scale: -180, // réfraction (effet concentré sur les bords)
+      cssBlur: 8, // flou du fond plus marqué
+      saturation: 1,
       frost: 0,
     });
     return () => inst.destroy();
@@ -27,12 +27,12 @@ export default function Header() {
     <header
       ref={headerRef}
       className={`sticky top-0 z-10 flex items-center justify-between border-b border-border px-6 py-6 sm:px-12 ${
-        glassEnabled ? 'bg-white/70' : 'bg-background/80 backdrop-blur-sm'
+        glassEnabled ? 'bg-transparent' : 'bg-background/80 backdrop-blur-sm'
       }`}
     >
       <div className="flex items-center justify-center gap-3">
         <span className="flex h-[24px] w-[25px] items-center justify-center text-foreground">
-          <Logo className="h-[23px] w-[23px] rotate-[4.49deg]" />
+          <Logo className="h-[32px] w-[32px] rotate-[4.49deg]" />
         </span>
         <p className="font-display text-label text-foreground">Sordulo Components</p>
       </div>
