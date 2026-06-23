@@ -1,0 +1,67 @@
+/* ============================================================
+   DESIGN TOKENS — Sordulo
+   Architecture à 2 niveaux :
+   1. PRIMITIVES (:root)  → valeurs brutes, jamais utilisées directement
+      dans les composants.
+   2. SÉMANTIQUES (@theme) → tokens nommés par usage, exposés en
+      utilitaires Tailwind (bg-surface, text-subtle, text-display, …).
+   Pour changer la charte, on touche ici — pas les composants.
+   ============================================================ */
+
+:root {
+  /* --- Primitives : palette brute --- */
+  --c-night: #00082e; /* bleu nuit de marque */
+  --c-black: #000000;
+  --c-white: #ffffff;
+  --c-gray: #5f5f5f;
+  --c-green: #10b981;
+
+  /* --- Primitives : familles typographiques --- */
+  --ff-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --ff-display: 'Youth', 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+@theme {
+  /* ---------- Couleurs sémantiques ---------- */
+  --color-background: var(--c-white);
+  --color-foreground: var(--c-black); /* texte principal */
+  --color-muted: var(--c-gray); /* texte tertiaire (badge) */
+  --color-subtle: color-mix(in srgb, var(--c-night) 20%, transparent); /* texte secondaire */
+  --color-brand: var(--c-night);
+  --color-success: var(--c-green);
+
+  /* Surfaces & bordures dérivées du bleu nuit */
+  --color-surface: color-mix(in srgb, var(--c-night) 5%, transparent);
+  --color-surface-strong: color-mix(in srgb, var(--c-night) 10%, transparent);
+  --color-border: color-mix(in srgb, var(--c-night) 12%, transparent);
+
+  /* ---------- Typographie ---------- */
+  --font-sans: var(--ff-sans);
+  --font-display: var(--ff-display);
+
+  /* Styles de texte (génèrent les utilitaires text-display / text-label / text-caption) */
+  --text-display: 43px;
+  --text-display--line-height: 0.9;
+  --text-display--letter-spacing: -1.72px;
+  --text-display--font-weight: 700;
+
+  --text-label: 14px;
+  --text-label--line-height: 0.94;
+  --text-label--letter-spacing: -0.7px;
+  --text-label--font-weight: 600;
+
+  --text-caption: 11px;
+  --text-caption--line-height: 1;
+  --text-caption--letter-spacing: -0.3px;
+  --text-caption--font-weight: 600;
+
+  /* ---------- Rayons ---------- */
+  --radius-card: 12px;
+  --radius-pill: 999px;
+}
+
+/* ---------- Tokens de mise en page (non générés par Tailwind) ---------- */
+:root {
+  --layout-max-width: 1116px;
+  --layout-gutter: 48px;
+}
