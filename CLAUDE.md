@@ -9,7 +9,7 @@ composants seront ajoutés progressivement.
 
 - **Vite** + **React** + **TypeScript**
 - **Tailwind CSS v4** (plugin `@tailwindcss/vite`, configuration via `@theme` dans `src/styles/tokens.css` — pas de `tailwind.config.js`)
-- Polices : **DM Sans** (Google Fonts) pour le texte courant ; **Youth** pour le titre d'affichage (fichiers `.otf` dans `public/fonts/Youth-normal/`, déclarés en `@font-face` dans `src/index.css`, exposés via `--font-display` / classe `font-display`).
+- Polices : **DM Sans** (Google Fonts) pour le texte courant ; **Talina** pour le titre d'affichage (fichier `.otf` dans `public/fonts/`, déclaré en `@font-face` dans `src/styles/fonts.css`, exposé via `--font-display` / classe `font-display`).
 
 ## Commandes
 
@@ -25,7 +25,7 @@ src/
 ├── index.css                    # Point d'entrée CSS (imports + base)
 ├── styles/
 │   ├── tokens.css               # Design tokens (primitives + @theme sémantique)
-│   └── fonts.css                # @font-face « Youth »
+│   └── fonts.css                # @font-face « Talina »
 ├── components/
 │   ├── Logo.tsx                 # Logo SVG Sordulo (étoile/soleil)
 │   ├── ComponentCard.tsx        # Carte d'aperçu (preview + nom + description + badges)
@@ -51,7 +51,7 @@ n'utilisent **jamais** de valeur en dur — uniquement les utilitaires sémantiq
 - `src/styles/tokens.css`
   - **Primitives** (`:root`) — palette et familles brutes : `--c-night`, `--c-black`, `--c-gray`, `--c-green`, `--ff-sans`, `--ff-display`. Jamais référencées directement dans les composants.
   - **Sémantiques** (`@theme`) — nommées par usage, dérivées des primitives via `color-mix`, et exposées en utilitaires Tailwind.
-- `src/styles/fonts.css` — déclarations `@font-face` (« Youth »).
+- `src/styles/fonts.css` — déclarations `@font-face` (« Talina »).
 - `src/index.css` — orchestre les imports (`tailwindcss`, `fonts`, `tokens`) + styles de base.
 
 ### Couleurs sémantiques → utilitaires
@@ -78,7 +78,7 @@ Styles de texte composites (taille + interligne + interlettrage + graisse) :
 | `--text-label`   | 14px / 0.94 / -0.7px / 600       | `text-label`   | Labels, descriptions, header |
 | `--text-caption` | 11px / 1 / -0.3px / 600          | `text-caption` | Badges plateforme  |
 
-Familles : `font-sans` (DM Sans), `font-display` (Youth). Rayons : `rounded-card` (12px), `rounded-pill` (999px). Layout : `--layout-max-width` (1116px), `--layout-gutter` (48px).
+Familles : `font-sans` (DM Sans), `font-display` (Talina). Rayons : `rounded-card` (12px), `rounded-pill` (999px). Layout : `--layout-max-width` (1116px), `--layout-gutter` (48px).
 
 ## Ajouter un composant à la vitrine
 

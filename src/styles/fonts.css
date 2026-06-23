@@ -1,33 +1,7 @@
 /* ============================================================
    Polices auto-hébergées
-   « Youth » = police d'affichage (titres). Fichiers : public/fonts/
+   Aucune police d'affichage custom active : le titre utilise DM Sans
+   (cf. --ff-display dans tokens.css). Le fichier public/fonts/Talina-DEMO.otf
+   reste disponible — pour le réactiver, redéclarer un @font-face ici et
+   pointer --ff-display dessus.
    ============================================================ */
-
-@font-face {
-  font-family: 'Youth';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/Youth-normal/Youth-normal-400-100.otf') format('opentype');
-}
-@font-face {
-  font-family: 'Youth';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('/fonts/Youth-normal/Youth-normal-500-100.otf') format('opentype');
-}
-@font-face {
-  font-family: 'Youth';
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url('/fonts/Youth-normal/Youth-normal-700-100.otf') format('opentype');
-}
-@font-face {
-  font-family: 'Youth';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('/fonts/Youth-normal/Youth-normal-900-100.otf') format('opentype');
-}

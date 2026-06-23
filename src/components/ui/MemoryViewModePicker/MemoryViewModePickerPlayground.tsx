@@ -256,12 +256,12 @@ export default function MemoryViewModePickerPlayground() {
         <ColorRow label="Couleur" value={params.trackColor} onChange={(v) => set('trackColor', v)} />
         <Slider
           label="Opacité"
-          value={params.trackOpacity}
+          value={Math.round(params.trackOpacity * 100)}
           min={0}
-          max={1}
-          step={0.02}
-          onChange={(v) => set('trackOpacity', v)}
-          format={(v) => v.toFixed(2)}
+          max={100}
+          step={1}
+          onChange={(v) => set('trackOpacity', v / 100)}
+          format={(v) => `${v}%`}
         />
         <Slider
           label="Contour"
@@ -284,12 +284,12 @@ export default function MemoryViewModePickerPlayground() {
         <Section title="Ombre" />
         <Slider
           label="Opacité"
-          value={params.shadowOpacity}
+          value={Math.round(params.shadowOpacity * 100)}
           min={0}
-          max={1}
-          step={0.02}
-          onChange={(v) => set('shadowOpacity', v)}
-          format={(v) => v.toFixed(2)}
+          max={100}
+          step={1}
+          onChange={(v) => set('shadowOpacity', v / 100)}
+          format={(v) => `${v}%`}
         />
         {params.shadowOpacity > 0 && (
           <>
@@ -348,12 +348,12 @@ export default function MemoryViewModePickerPlayground() {
             />
             <Slider
               label="Voile"
-              value={params.frost}
+              value={Math.round(params.frost * 100)}
               min={0}
-              max={0.6}
-              step={0.02}
-              onChange={(v) => set('frost', v)}
-              format={(v) => v.toFixed(2)}
+              max={60}
+              step={1}
+              onChange={(v) => set('frost', v / 100)}
+              format={(v) => `${v}%`}
             />
             <Slider
               label="Aberration verte"
@@ -386,12 +386,12 @@ export default function MemoryViewModePickerPlayground() {
             />
             <Slider
               label="Opacité du bouton"
-              value={params.indicatorOpacity}
+              value={Math.round(params.indicatorOpacity * 100)}
               min={0}
-              max={1}
-              step={0.02}
-              onChange={(v) => set('indicatorOpacity', v)}
-              format={(v) => v.toFixed(2)}
+              max={100}
+              step={1}
+              onChange={(v) => set('indicatorOpacity', v / 100)}
+              format={(v) => `${v}%`}
             />
           </>
         )}

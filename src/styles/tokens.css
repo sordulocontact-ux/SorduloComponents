@@ -18,7 +18,7 @@
 
   /* --- Primitives : familles typographiques --- */
   --ff-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
-  --ff-display: 'Youth', 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --ff-display: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
 @theme {
