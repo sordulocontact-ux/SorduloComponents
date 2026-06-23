@@ -84,17 +84,25 @@ Familles : `font-sans` (DM Sans), `font-display` (Youth). Rayons : `rounded-card
 
 1. Créer le composant dans son dossier : `src/components/ui/MonComposant/MonComposant.tsx`.
    N'utiliser **que** les tokens sémantiques (jamais de couleur/taille en dur).
+   Un son éventuel est colocalisé dans le même dossier (ex. `tap-sound.mp3`).
 2. L'enregistrer dans `src/showcase/registry.tsx` :
 
 ```tsx
+import monSon from '../components/ui/MonComposant/mon-son.mp3';
+
 {
   id: 'mon-composant',
   name: 'Mon composant',
   description: 'Courte description',
   preview: <MonComposant />,
   platforms: ['react', 'swift'], // badges affichés sur la carte (optionnel)
+  sound: monSon,                 // sound design : clic → son + icône animée (optionnel)
 }
 ```
+
+**Sound design** : si `sound` est défini, un clic sur la carte joue le fichier audio et
+déclenche l'icône son animée (`SoundWave`, ~1,4 s : apparition → montée → descente →
+disparition). Sans `sound`, le clic ne fait rien apparaître.
 
 La grille de `Home.tsx` se met à jour automatiquement à partir du registre.
 

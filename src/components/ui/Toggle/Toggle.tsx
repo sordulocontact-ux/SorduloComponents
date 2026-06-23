@@ -1,26 +1,16 @@
 import { useState } from 'react';
+import ToggleSwitch from './ToggleSwitch';
 
 type ToggleProps = {
   defaultOn?: boolean;
 };
 
-/** Interrupteur on/off — composant de la bibliothèque Sordulo */
+/**
+ * Interrupteur on/off de la bibliothèque Sordulo.
+ * Enveloppe `ToggleSwitch` (contrôlé) avec un état local pour l'aperçu.
+ * Le son est joué par la carte au clic (cf. `sound` dans le registre).
+ */
 export default function Toggle({ defaultOn = false }: ToggleProps) {
   const [on, setOn] = useState(defaultOn);
-  return (
-    <button
-      type="button"
-      role="switch"
-      aria-checked={on}
-      onClick={() => setOn((v) => !v)}
-      className="flex items-center gap-1 rounded-pill bg-foreground p-1"
-    >
-      <span
-        className={`size-6 rounded-pill bg-background transition-opacity ${on ? 'opacity-0' : 'opacity-100'}`}
-      />
-      <span
-        className={`size-6 rounded-pill bg-background transition-opacity ${on ? 'opacity-100' : 'opacity-0'}`}
-      />
-    </button>
-  );
+  return <ToggleSwitch isActive={on} onChange={setOn} />;
 }

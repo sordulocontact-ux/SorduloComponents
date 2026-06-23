@@ -1,22 +1,55 @@
+import { useEffect, useRef } from 'react';
 import Logo from '../Logo';
+import { useGlassEnabled, toggleGlass } from '../../lib/settings';
+import { createLiquidGlass } from '../../lib/liquid-glass';
 
 export default function Header() {
+  const glassEnabled = useGlassEnabled();
+  const headerRef = useRef<HTMLElement>(null);
+
+  // Vrai liquid-glass sur la barre de nav : elle réfracte le contenu qui défile dessous.
+  // Désactivé via le toggle global → repli sur fond translucide + flou Tailwind.
+  useEffect(() => {
+    if (!glassEnabled) return;
+    const el = headerRef.current;
+    if (!el) return;
+    const inst = createLiquidGlass(el, {
+      borderRadius: 0,
+      scale: -80, // réfraction (effet concentré sur les bords)
+      cssBlur: 2, // flou global léger seulement
+      saturation: 1.15,
+      frost: 0,
+    });
+    return () => inst.destroy();
+  }, [glassEnabled]);
+
   return (
-    <header className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/80 px-6 py-6 backdrop-blur-sm sm:px-12">
+    <header
+      ref={headerRef}
+      className={`sticky top-0 z-10 flex items-center justify-between border-b border-border px-6 py-6 sm:px-12 ${
+        glassEnabled ? 'bg-white/70' : 'bg-background/80 backdrop-blur-sm'
+      }`}
+    >
       <div className="flex items-center justify-center gap-3">
         <span className="flex h-[24px] w-[25px] items-center justify-center text-foreground">
           <Logo className="h-[23px] w-[23px] rotate-[4.49deg]" />
         </span>
-        <p className="text-label text-foreground">Sordulo Components</p>
+        <p className="font-display text-label text-foreground">Sordulo Components</p>
       </div>
 
       <div className="flex items-center gap-[13px]">
         <button
           type="button"
+          onClick={toggleGlass}
+          aria-pressed={glassEnabled}
           className="flex items-center justify-center gap-2 rounded-pill bg-surface p-3 transition-colors hover:bg-surface-strong"
         >
-          <span className="size-[13px] rounded-pill bg-success" />
-          <span className="text-label text-muted">Sound on</span>
+          <span
+            className={`size-[13px] rounded-pill ${glassEnabled ? 'bg-success' : 'bg-subtle'}`}
+          />
+          <span className="text-label text-muted">
+            Glass {glassEnabled ? 'on' : 'off'}
+          </span>
         </button>
       </div>
     </header>
