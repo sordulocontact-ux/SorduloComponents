@@ -2,9 +2,16 @@ import { useEffect, useRef } from 'react';
 import Logo from '../Logo';
 import { useGlassEnabled, toggleGlass } from '../../lib/settings';
 import { createLiquidGlass } from '../../lib/liquid-glass';
+import { Link, useRoute } from '../../router';
+
+const NAV = [
+  { to: '/', label: 'Components' },
+  { to: '/inspirations', label: 'Inspirations' },
+];
 
 export default function Header() {
   const glassEnabled = useGlassEnabled();
+  const route = useRoute();
   const headerRef = useRef<HTMLElement>(null);
 
   // Vrai liquid-glass sur la barre de nav : elle réfracte le contenu qui défile dessous.
@@ -38,6 +45,24 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-[13px]">
+        <nav className="flex items-center gap-1">
+          {NAV.map((item) => {
+            const active =
+              item.to === '/' ? route === '/' || route.startsWith('/c/') : route === item.to;
+            return (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`rounded-pill px-3 py-2 text-label transition-colors ${
+                  active ? 'bg-surface text-foreground' : 'text-muted hover:bg-surface'
+                }`}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
+        </nav>
+
         <button
           type="button"
           onClick={toggleGlass}
